@@ -12,6 +12,50 @@ This script will get us started on morphometrics analysis using Generalized Proc
 This is a method for quantifying shape by removing the effects of size and orientation from the data
 this will rely heavily on the geomoph package from Adams et al. August 13, 2020
 
+```
+Characters:
+Orientation	Sequence	Description
+Ventral	1	apex rostrum
+Ventral	2	apex lower jaw
+Ventral	3	anterior mental gland
+Ventral	4	posterior mental gland
+Ventral	5	left side jaw terminus
+Ventral	6	right side jaw terminus
+Ventral	7	widest part of head left
+Ventral	8	widest part of head right
+Ventral	9	gular fold
+Ventral	10	axilla left
+Ventral	11	axilla right
+Ventral	12	best forelimb-body junction
+Ventral	13	same forelimb elbow
+Ventral	14	same forelimb wrist (start of carpals)
+Ventral	15	terminus of first digit (closest to body)
+Ventral	16	terminus of second digit
+Ventral	17	terminus of third digit
+Ventral	18	terminus of forth digit
+Ventral	19	midline at axilla
+Ventral	20	body midline 1
+Ventral	21	body midline 2
+Ventral	22	body midline 3
+Ventral	23	best hindlimb-body junction
+Ventral	24	same hindlimb knee
+Ventral	25	same hindlimb wrist (start of carpals)
+Ventral	26	terminus of first digit (closest to body)
+Ventral	27	terminus of second digit
+Ventral	28	terminus of third digit
+Ventral	29	terminus of forth digit
+Ventral	30	terminus of fifth digit
+Ventral	31	midline at groin
+Ventral	32	anterior cloaca
+Ventral	33	posterior cloaca
+Ventral	34	tail midline 1
+Ventral	35	tail midline 2
+Ventral	36	tail midline 3
+Ventral	37	terminus of tail
+only dorsal	NA	best eye proximal terminus
+only dorsal	NA	same eye distal terminus
+```
+
 ```{r data}
 library(stats)
 library(geomorph)
@@ -38,9 +82,6 @@ sal.out<-gpagen(sal_data, PrinAxes = FALSE)
 ####### What are the small points and big points?
 ####### How do you reflect legs?
 plot(sal.out)
-
-sal.out$coords
-plot(sal.out$coords)
 
 #export the procrustes data. Makes it nice and flat. Should be another way to do this.
 write.csv(sal.out$coords, "salOut.csv", row.names = FALSE)
