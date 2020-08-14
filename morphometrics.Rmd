@@ -11,6 +11,9 @@ knitr::opts_chunk$set(echo = TRUE)
 This script will get us started on morphometrics analysis using Generalized Procrustes Analysis
 This is a method for quantifying shape by removing the effects of size and orientation from the data
 this will rely heavily on the geomoph package from Adams et al. August 13, 2020
+#https://seltmann.github.io/sal-morpho/morphometrics.html
+#https://docs.google.com/spreadsheets/d/1g-OSP46gR63IXUBArTfXp0iPpRbGe-VF7XeH9ixrfGo/edit#gid=185835931  
+
 
 ```
 Characters:
@@ -74,6 +77,7 @@ data<-readland.tps("test.tps", specID = c("imageID"), readcurves = FALSE, warnms
 
 #to see the procrustes data text
 sal_data<-data[c(1:2,5:11),,]
+#sal_data<-data
 sal.out<-gpagen(sal_data, PrinAxes = FALSE)
 
 #to plot the data
@@ -82,9 +86,9 @@ sal.out<-gpagen(sal_data, PrinAxes = FALSE)
 ####### What are the small points and big points?
 ####### How do you reflect legs?
 plot(sal.out)
-
+print(sal.out$data)
 #export the procrustes data. Makes it nice and flat. Should be another way to do this.
-write.csv(sal.out$coords, "salOut.csv", row.names = FALSE)
+write.csv(sal.out$data, "salOut.csv", row.names = FALSE)
 ```
 
 ## PCA
@@ -97,6 +101,8 @@ write.csv(sal.out$coords, "salOut.csv", row.names = FALSE)
 #Where many variables correlate with one another, they will all contribute strongly to the same principal component. Each principal component sums up a certain percentage of the total variation in the dataset. Where your initial variables are strongly correlated with one another, you will be able to approximate most of the complexity in your dataset with just a few principal components. As you add more principal components, you summarize more and more of the original dataset. Adding additional components makes your estimate of the total dataset more accurate, but also more unwieldy.
 
 sal <- read.csv(file="salOut.csv")
+#sal <- sal.out$coords
+print(sal)
 sal.pca <- prcomp(sal, center=TRUE, scale=TRUE)
 summary(sal.pca)
 #PC1 55%, PC2 46%
