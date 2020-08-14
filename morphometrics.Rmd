@@ -88,7 +88,7 @@ sal.out<-gpagen(sal_data, PrinAxes = FALSE)
 plot(sal.out)
 print(sal.out$data)
 #export the procrustes data. Makes it nice and flat. Should be another way to do this.
-write.csv(sal.out$data, "salOut.csv", row.names = FALSE)
+#write.csv(sal.out$data, "salOut.csv", row.names = FALSE)
 ```
 
 ## PCA
@@ -100,8 +100,8 @@ write.csv(sal.out$data, "salOut.csv", row.names = FALSE)
 
 #Where many variables correlate with one another, they will all contribute strongly to the same principal component. Each principal component sums up a certain percentage of the total variation in the dataset. Where your initial variables are strongly correlated with one another, you will be able to approximate most of the complexity in your dataset with just a few principal components. As you add more principal components, you summarize more and more of the original dataset. Adding additional components makes your estimate of the total dataset more accurate, but also more unwieldy.
 
-sal <- read.csv(file="salOut.csv")
-#sal <- sal.out$coords
+#sal <- read.csv(file="salOut.csv")
+sal <- sal.out$data
 print(sal)
 sal.pca <- prcomp(sal, center=TRUE, scale=TRUE)
 summary(sal.pca)
